@@ -114,32 +114,47 @@ function findTransactionByDescription(string $descriptionPart) : array {
 <img width="346" alt="image" src="https://github.com/user-attachments/assets/fe80f6ca-4588-4078-a6cb-0a587d1ba62b" />
 
 **3. Поиск транзакции по `id`**
-- Через `foreach`:
+
+
+Через `foreach`:
+
   ```php
-function findTransactionById(int $id) {
-    foreach ($GLOBALS['transactions'] as $transaction) {
-        if ($transaction['id'] === $id) return $transaction;
-    }
-
-    return [];
-}
+     /**
+    * Ищет транзакцию по ID.
+    *
+    * @param int $id Уникальный идентификатор транзакции.
+    * @return array Найденная транзакция или пустой массив.
+    */
+         function findTransactionById(int $id) {
+             foreach ($GLOBALS['transactions'] as $transaction) {
+                 if ($transaction['id'] === $id) return $transaction;
+             }
+         
+             return [];
+         }
   ```
-- Через `array_filter()` (на высшую оценку).
-    ```php
-/**
- * Ищет транзакцию по ID.
- *
- * @param int $id Уникальный идентификатор транзакции.
- * @return array Найденная транзакция или пустой массив.
- */
+  
 
-function findTransactionById(int $id) {
-    $callback = function ($transaction) use ($id) {
-        return $transaction['id'] === $id;
-    };
-    return array_filter($GLOBALS['transactions'], $callback);
-}
-```
+
+Через `array_filter()` (на высшую оценку).
+
+
+ ```php
+   /**
+    * Ищет транзакцию по ID.
+    *
+    * @param int $id Уникальный идентификатор транзакции.
+    * @return array Найденная транзакция или пустой массив.
+    */
+   
+   function findTransactionById(int $id) {
+       $callback = function ($transaction) use ($id) {
+           return $transaction['id'] === $id;
+       };
+       return array_filter($GLOBALS['transactions'], $callback);
+   }
+   ```
+   
 
 <img width="437" alt="image" src="https://github.com/user-attachments/assets/fee7fac4-038e-43c3-807c-6bf4496f0439" />
 
